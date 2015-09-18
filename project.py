@@ -5,6 +5,17 @@ from flask import Flask
 # createa an object using the
 app = Flask(__name__)
 
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from database import Base, Restaurant, MenuItem
+
+engine = create_engine('sqlite:///menuapp.db')
+Base.metadata.bind = engine
+
+DBSession = sessionmaker(bind = engine)
+session = DBSession()
+
+
 # following are decorator in python, starts with @
 # decorator wraps the function that flask has already created
 # so if either of these routes gets sent from the browser, then the method provided get called
@@ -13,7 +24,13 @@ app = Flask(__name__)
 @app.route('/')
 @app.route('/hello')
 def HelloWorld():
-    return "Hello World"
+    restaurant = session.query(Restaurant).first()
+    items = session.query(MenuItem).filter_by( restaurant_id = restaurant.id)
+    output = ''
+    for i in items:
+        output += i.name
+        output += '<br>'
+    return output
 
 # python interpretor gets the __name__ set to  __main__
 # if statement makes sures that webserver is run only when script is executed directly from the python interpretor
