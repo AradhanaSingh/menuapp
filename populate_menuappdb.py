@@ -1,5 +1,5 @@
 '''
-This files populates data in restaurant and meny_item table in menuapp.db
+This files populates data in restaurant and menu_item table in menuapp.db
 '''
 
 from sqlalchemy import create_engine
