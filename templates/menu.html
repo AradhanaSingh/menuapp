@@ -9,6 +9,11 @@
         Can use HTML escaping to get python data, we ahve access to python variables
      -->
     <h1> {{restaurant.name}}</h1>
+
+    <a href="{{url_for('newMenuItem', restaurant_id = restaurant.id)}}">Create New Item</a>
+    <br>
+    <br>
+
     {% for i in items %}
     {{i.name}}
     </br>
