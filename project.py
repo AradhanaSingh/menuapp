@@ -20,14 +20,15 @@ session = DBSession()
 
 
 # following are decorator in python, starts with @
+# decorators are used to find function with url
 # decorator wraps the function that flask has already created
 # so if either of these routes gets sent from the browser, then the method provided get called
 # when a webserver gets a request that matches the path, following method would be executed
 # both the below urls take to the same page, "/" calls "/hello"
 @app.route('/')
-@app.route('/hello')
-def HelloWorld():
-    restaurant = session.query(Restaurant).first()
+@app.route('/restaurants/<int:restaurant_id>')
+def restaurantMenu(restaurant_id):
+    restaurant = session.query(Restaurant).filter_by( id = restaurant_id).one()
     items = session.query(MenuItem).filter_by( restaurant_id = restaurant.id)
     output = ''
     for i in items:
