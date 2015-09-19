@@ -26,7 +26,7 @@ session = DBSession()
 # when a webserver gets a request that matches the path, following method would be executed
 # both the below urls take to the same page, "/" calls "/hello"
 @app.route('/')
-@app.route('/restaurants/<int:restaurant_id>')
+@app.route('/restaurants/<int:restaurant_id>/')
 def restaurantMenu(restaurant_id):
     restaurant = session.query(Restaurant).filter_by( id = restaurant_id).one()
     items = session.query(MenuItem).filter_by( restaurant_id = restaurant.id)
@@ -39,6 +39,19 @@ def restaurantMenu(restaurant_id):
         output += i.description
         output += '<br><br>'
     return output
+
+
+@app.route('/restaurants/<int:restaurant_id>/newmenuitem')
+def newMenuItem(restaurant_id):
+        return "page to create a new menu item."
+
+@app.route('/restaurants/<int:restaurant_id>/editmenuitem/<int:menu_id>')
+def editMenuItem(restaurant_id, menu_id):
+    return "page to edit menu item"
+
+@app.route('/restaurants/<int:restaurant_id>/deletemenuitem/<int:menu_id>')
+def deleteMenuItem(restaurant_id, menu_id):
+    return "page to delete a menu item"
 
 # python interpretor gets the __name__ set to  __main__
 # if statement makes sures that webserver is run only when script is executed directly from the python interpretor
