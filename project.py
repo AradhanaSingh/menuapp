@@ -41,15 +41,15 @@ def restaurantMenu(restaurant_id):
     return output
 
 
-@app.route('/restaurants/<int:restaurant_id>/newmenuitem')
+@app.route('/restaurants/<int:restaurant_id>/new/')
 def newMenuItem(restaurant_id):
         return "page to create a new menu item."
 
-@app.route('/restaurants/<int:restaurant_id>/editmenuitem/<int:menu_id>')
+@app.route('/restaurants/<int:restaurant_id>/edit/<int:menu_id>')
 def editMenuItem(restaurant_id, menu_id):
     return "page to edit menu item"
 
-@app.route('/restaurants/<int:restaurant_id>/deletemenuitem/<int:menu_id>')
+@app.route('/restaurants/<int:restaurant_id>/delete/<int:menu_id>')
 def deleteMenuItem(restaurant_id, menu_id):
     return "page to delete a menu item"
 
