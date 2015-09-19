@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <!--
+        Can use HTML escaping to get python data, we ahve access to python variables
+     -->
+    <h1> {{restaurant.name}}</h1>
+    {% for i in items %}
+    {{i.name}}
+    </br>
+    {{i.description}}
+    </br>
+    {{i.price}}
+    </br>
+    </br>
+    <!-- cannot use indentation in html file to mark the end of for loop or if statement -->
+    {% endfor %}
+    </body>
+
+</body>
+</html>
