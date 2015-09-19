@@ -2,7 +2,7 @@
 this file starts webserver
 '''
 # importing Flask class
-from flask import Flask , render_template
+from flask import Flask , render_template, request
 
 # anytime python applicatin is run, special variable __name__ gets declared
 # createa an object using the
@@ -33,9 +33,16 @@ def restaurantMenu(restaurant_id):
     # looks for html page in template directory
     return render_template('menu.html', restaurant = restaurant, items = items)
 
-@app.route('/restaurants/<int:restaurant_id>/new/')
+# by default app.route takes get method
+# using methods we can add it for GET and POST request
+@app.route('/restaurants/<int:restaurant_id>/new/', methods = ['GET','POST'])
 def newMenuItem(restaurant_id):
-        return "page to create a new menu item."
+        if request.method == 'POST':
+            newItem = request.form['name']
+            newItemObj = MenuItem(name = newItem, restaurant_id = restaurant_id)
+            session.add(newItemObj)
+            session.commit()
+        return render_template('newmenuitem.html', restaurant_id = restaurant_id)
 
 @app.route('/restaurants/<int:restaurant_id>/edit/<int:menu_id>')
 def editMenuItem(restaurant_id, menu_id):
