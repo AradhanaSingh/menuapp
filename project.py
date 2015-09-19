@@ -2,7 +2,7 @@
 this file starts webserver
 '''
 # importing Flask class
-from flask import Flask , render_template, request
+from flask import Flask , render_template, request, redirect, url_for
 
 # anytime python applicatin is run, special variable __name__ gets declared
 # createa an object using the
@@ -42,6 +42,8 @@ def newMenuItem(restaurant_id):
             newItemObj = MenuItem(name = newItem, restaurant_id = restaurant_id)
             session.add(newItemObj)
             session.commit()
+            # after adding menu item redirect to url "/"
+            return redirect(url_for('restaurantMenu', restaurant_id = restaurant_id ))
         return render_template('newmenuitem.html', restaurant_id = restaurant_id)
 
 @app.route('/restaurants/<int:restaurant_id>/edit/<int:menu_id>')
