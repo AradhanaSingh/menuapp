@@ -55,12 +55,17 @@ def editMenuItem(restaurant_id, menu_id):
         session.commit()
         return redirect(url_for('restaurantMenu', restaurant_id = restaurant_id))
     else:
-        return render_template('editmenuitem.html', restaurant_id = restaurant_id, menu_id = menu_id, editedItem = editedItem)
+        return render_template('editmenuitem.html', restaurant_id = restaurant_id, editedItem = editedItem)
 
 
-@app.route('/restaurants/<int:restaurant_id>/delete/<int:menu_id>')
+@app.route('/restaurants/<int:restaurant_id>/delete/<int:menu_id>', methods=['GET','POST'])
 def deleteMenuItem(restaurant_id, menu_id):
-    return "page to delete a menu item"
+    deletedItem = session.query(MenuItem).filter_by(id = menu_id).one()
+    if request.method=="POST":
+        session.delete(deletedItem)
+        session.commit()
+        return redirect(url_for('restaurantMenu', restaurant_id = restaurant_id))
+    return render_template('deletemenuitem.html', deletedItem = deletedItem )
 
 # python interpretor gets the __name__ set to  __main__
 # if statement makes sures that webserver is run only when script is executed directly from the python interpretor
