@@ -5,47 +5,66 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
 </head>
-
+<body>
     <!--
         Can use HTML escaping to get python data, we ahve access to python variables
      -->
-    <h1> {{restaurant.name}}</h1>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul>
-                {% for message in messages %}
-                    <li><strong> {{message}}</strong></li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
+    <div class = 'pane'>
+        <div class = 'header'>
+            <h1> {{restaurant.name}}</h1>
+        </div>
 
-    <a href="{{url_for('newMenuItem', restaurant_id = restaurant.id)}}">Create New Item</a>
-    <br>
-    <br>
+        <div class="flash">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                            <li><strong> {{message}}</strong></li>
+                        {% endfor %}
+                 </ul>
+             {% endif %}
+            {% endwith %}
+        </div>
 
-    {% for i in items %}
-    {{i.name}}
-    </br>
-    {{i.description}}
-    </br>
-    {{i.price}}
-    </br>
+        <a href="{{url_for('newMenuItem', restaurant_id = restaurant.id)}}">Create New Item</a>
+        <br>
+        <br>
 
-    <!-- url_for method accepts the name of the method as first argument, unknown variables are appended to the URL as query parameters.
-        helps to change the url all over the place.
-    -->
-    <a href="{{ url_for('editMenuItem', restaurant_id = restaurant.id, menu_id = i.id)}}">Edit</a>
-    </br>
+        {% for i in items %}
+        <div>
+            <span class = 'name'>
+                <p>{{i.name}}</p>
+            </span>
+            </br>
 
-    <a href="{{ url_for('deleteMenuItem', restaurant_id = restaurant.id, menu_id = i.id)}}">Delete</a>
-    </br>
-    </br>
+            <span class="price">
+               <p> {{i.price}} </p>
+            </span>
+        </div>
 
-    <!-- cannot use indentation in html file to mark the end of for loop or if statement -->
-    {% endfor %}
+        <div class="description">
+            </br>
+                <p>{{i.description}} </p>
 
-    </body>
+            </br>
+        </div>
+
+        <div class="editdeletepane">
+            <!-- url_for method accepts the name of the method as first argument, unknown variables are appended to the URL as query parameters.
+                helps to change the url all over the place.
+            -->
+            <a href="{{ url_for('editMenuItem', restaurant_id = restaurant.id, menu_id = i.id)}}">Edit</a>
+            </br>
+
+            <a href="{{ url_for('deleteMenuItem', restaurant_id = restaurant.id, menu_id = i.id)}}">Delete</a>
+            </br>
+            </br>
+        </div>
+
+        <!-- cannot use indentation in html file to mark the end of for loop or if statement -->
+        {% endfor %}
+
+    </div>
 
 </body>
 </html>
