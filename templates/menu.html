@@ -45,8 +45,6 @@
         <div class="description">
             </br>
                 <p>{{i.description}} </p>
-
-            </br>
         </div>
 
         <div class="editdeletepane">
@@ -54,11 +52,10 @@
                 helps to change the url all over the place.
             -->
             <a href="{{ url_for('editMenuItem', restaurant_id = restaurant.id, menu_id = i.id)}}">Edit</a>
-            </br>
 
             <a href="{{ url_for('deleteMenuItem', restaurant_id = restaurant.id, menu_id = i.id)}}">Delete</a>
             </br>
-            </br>
+
         </div>
 
         <!-- cannot use indentation in html file to mark the end of for loop or if statement -->
