@@ -2,7 +2,7 @@
 this file starts webserver
 '''
 # importing Flask class
-from flask import Flask , render_template, request, redirect, url_for
+from flask import Flask , render_template, request, redirect, url_for, flash
 
 # anytime python applicatin is run, special variable __name__ gets declared
 # createa an object using the
@@ -42,6 +42,7 @@ def newMenuItem(restaurant_id):
             newItemObj = MenuItem(name = newItem, restaurant_id = restaurant_id)
             session.add(newItemObj)
             session.commit()
+            flash("new menu item created")
             # after adding menu item redirect to url home page
             return redirect(url_for('restaurantMenu', restaurant_id = restaurant_id ))
         return render_template('newmenuitem.html', restaurant_id = restaurant_id)
@@ -53,6 +54,7 @@ def editMenuItem(restaurant_id, menu_id):
         editedItem.name = request.form['name']
         session.add(editedItem)
         session.commit()
+        flash("Menu Item has been edited")
         return redirect(url_for('restaurantMenu', restaurant_id = restaurant_id))
     else:
         return render_template('editmenuitem.html', restaurant_id = restaurant_id, editedItem = editedItem)
@@ -64,12 +66,15 @@ def deleteMenuItem(restaurant_id, menu_id):
     if request.method=="POST":
         session.delete(deletedItem)
         session.commit()
+        flash('Menu item has been deleted')
         return redirect(url_for('restaurantMenu', restaurant_id = restaurant_id))
     return render_template('deletemenuitem.html', deletedItem = deletedItem )
 
 # python interpretor gets the __name__ set to  __main__
 # if statement makes sures that webserver is run only when script is executed directly from the python interpretor
 if __name__ == '__main__':
+    # session is way a server can store information across multiple web pages to create more personalized user experience
+    app.secret_key = 'super_secret_key'
     # latest code would be deployed on webser without restarting it manually
     app.debug = True
     # runs the local server
