@@ -2,7 +2,7 @@
 this file starts webserver
 '''
 # importing Flask class
-from flask import Flask , render_template, request, redirect, url_for, flash
+from flask import Flask , render_template, request, redirect, url_for, flash, jsonify
 
 # anytime python applicatin is run, special variable __name__ gets declared
 # createa an object using the
@@ -69,6 +69,14 @@ def deleteMenuItem(restaurant_id, menu_id):
         flash('Menu item has been deleted')
         return redirect(url_for('restaurantMenu', restaurant_id = restaurant_id))
     return render_template('deletemenuitem.html', deletedItem = deletedItem )
+
+
+# Making an api endpoint for get request
+@app.route('/restaurantsjson/<int:restaurant_id>')
+def getRestaurantsjson(restaurant_id):
+    restaurant = session.query(Restaurant).filter_by(id = restaurant_id).one()
+    # serializing so that flask can read it
+    return jsonify(Restaurant = restaurant.serialize)
 
 # python interpretor gets the __name__ set to  __main__
 # if statement makes sures that webserver is run only when script is executed directly from the python interpretor
