@@ -3,4 +3,4 @@ GET /foo HTTP1.1
 
 Headers
 Host : www.example.com
-user-agent : chrome
+user-agent : chrome v.17
