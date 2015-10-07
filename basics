@@ -1,9 +1,13 @@
 HTTP Request for http://localhost:8080/foo is 
 GET /foo HTTP1.1
 
+HTTP Response
+HTTP/1.1 200 ok
+
 Headers
 Host : www.example.com
 user-agent : chrome v.17
+user-defined-header : user-defined-values
 
 A user agent is a “string” – that is, a line of text – identifying the browser and operating system to the web server. 
 When your browser connects to a website, it includes a User-Agent field in its HTTP header. 
