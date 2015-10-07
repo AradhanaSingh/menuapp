@@ -1,17 +1,31 @@
 HTTP Request for http://localhost:8080/foo is 
 GET /foo HTTP1.1
-
-HTTP Response
-HTTP/1.1 200 ok
-
 Headers
 Host : www.example.com
 user-agent : chrome v.17
 user-defined-header : user-defined-values
+
+HTTP Response
+HTTP/1.1 200 ok
+Date : Tue Mar 2012
+Server: Apache/2.2.3
+Content-Type: text/html, img/png, img/jpeg
+Content-Length:1539
+
+<!DOCTYPE html>
+<html>
+</html>
+
 
 A user agent is a “string” – that is, a line of text – identifying the browser and operating system to the web server. 
 When your browser connects to a website, it includes a User-Agent field in its HTTP header. 
 The contents of the user agent field vary from browser to browser. Each browser has its own, distinctive user agent. 
 Essentially, a user agent is a way for a browser to say “Hi, I’m Mozilla Firefox on Windows” or “Hi, I’m Safari"
 The web server can use this information to serve different web pages to different web browsers and different operating systems.
-For example, a website could send mobile pages to mobile browsers
+For example, a website could send mobile pages to mobile browsers.
+
+Response of a website can be either
+1. Static : pre-written file image
+2. Dynamic : made on the fly(using web application)
+
+
