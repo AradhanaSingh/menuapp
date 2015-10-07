@@ -4,3 +4,10 @@ GET /foo HTTP1.1
 Headers
 Host : www.example.com
 user-agent : chrome v.17
+
+A user agent is a “string” – that is, a line of text – identifying the browser and operating system to the web server. 
+When your browser connects to a website, it includes a User-Agent field in its HTTP header. 
+The contents of the user agent field vary from browser to browser. Each browser has its own, distinctive user agent. 
+Essentially, a user agent is a way for a browser to say “Hi, I’m Mozilla Firefox on Windows” or “Hi, I’m Safari"
+The web server can use this information to serve different web pages to different web browsers and different operating systems.
+For example, a website could send mobile pages to mobile browsers
