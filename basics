@@ -1,0 +1,6 @@
+HTTP Request for http://localhost:8080/foo is 
+GET /foo HTTP1.1
+
+Headers
+Host : www.example.com
+user-agent : chrome
